@@ -1,5 +1,5 @@
 # bmobLibrary
-[![](https://jitpack.io/v/reyreyrey/library.svg)](https://jitpack.io/#reyreyrey/library)
+[![](https://jitpack.io/v/reyreyrey/library-2.3.3.svg)](https://jitpack.io/#reyreyrey/library-2.3.3)
 </br>
 
 ##引入
@@ -19,7 +19,7 @@
 <pre>
   <code>
   //加号替换为jitpack版本号
-    compile 'com.github.reyreyrey:library:+'
+    compile 'com.github.reyreyrey:library-2.3.3:+'
   </code>
 </pre>
 
@@ -41,7 +41,7 @@
     dependencies {
         compile fileTree(include: ['*.jar'], dir: 'libs')
         //加号替换为jitpack版本号
-        compile 'com.github.reyreyrey:library:+'
+        compile 'com.github.reyreyrey:library-2.3.3:+'
     }
   </code>
 </pre>
