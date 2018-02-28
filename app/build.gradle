@@ -1,0 +1,212 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven' // ADD THIS
+group='com.github.xinruzhou'
+version = '1.0'
+
+
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion "27.0.0"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+        useLibrary 'org.apache.http.legacy'
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : "1",
+                JPUSH_APPKEY : "1", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
+        buildConfigField("boolean", "DEBUG_LOG", "true")
+        buildConfigField("String", "TICKET_SECRET", TICKET_SECRET)
+        buildConfigField("String", "TICKET_APP_ID", TICKET_APP_ID)
+        buildConfigField("int", "TIME_CLICK_IGNORE", TIME_CLICK_IGNORE)
+        buildConfigField("String", "HOST_URL", HOST_URL)
+        //sp常量
+        buildConfigField("String", "KEY_APP_INFO", KEY_APP_INFO)
+        buildConfigField("String", "KEY_USER_RECORD", KEY_USER_RECORD)
+        buildConfigField("String", "KEY_MY_FOLLOW", KEY_MY_FOLLOW)
+        buildConfigField("String", "DEVICE_ID", DEVICE_ID)
+        buildConfigField("int", "CONNECT_TIMEOUT", CONNECT_TIMEOUT)
+        buildConfigField("int", "WRITE_TIMEOUT", WRITE_TIMEOUT)
+        buildConfigField("int", "READ_TIMEOUT", READ_TIMEOUT)
+        buildConfigField("boolean", "NETWORK_LOG", "true")
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    lintOptions {
+        baseline file("lint-baseline.xml")
+        checkAllWarnings true
+        warningsAsErrors true
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/README'
+        exclude 'META-INF/README.txt'
+        exclude 'META-INF/readme'
+        exclude 'META-INF/readme.txt'
+
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license'
+        exclude 'META-INF/license.txt'
+
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice'
+        exclude 'META-INF/notice.txt'
+
+        exclude 'META-INF/dependencies'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/DEPENDENCIES.txt'
+
+        exclude 'META-INF/PROPERTIES'
+        exclude 'META-INF/PROPERTIES.txt'
+        exclude 'META-INF/properties'
+        exclude 'META-INF/properties.txt'
+
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/ASL2.0'
+
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/rxjava.properties.txt'
+
+        exclude 'META-INF/RXJAVA.DEPENDENCIES'
+        exclude 'META-INF/RXJAVA.DEPENDENCIES.txt'
+
+        exclude 'META-INF/proguard/**'
+        exclude 'META-INF/*.version'
+    }
+
+/***For Android Studio 3.0+**/
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+
+}
+
+
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile dep.appcompat
+    compile dep.design
+    //沉浸式状态栏
+    compile dep.barlibrary
+    //极光
+    compile dep.jpush
+    compile dep.jcore
+    //水平数字进度条
+    compile dep.numberprogressbar
+    //loading动画
+    compile dep.AndroidSpinKit
+    compile dep.gson
+    compile dep.rxjava2
+    compile dep.rxandroid2
+    //轮播图
+    compile dep.bgabanner
+    compile files('libs/tbs_sdk_thirdapp_v3.3.0.1045_43300_sharewithdownload_withoutGame_obfs_20170605_170212.jar')
+    compile dep.okgo
+    //下拉刷新
+    compile dep.SmartRefreshLayout
+    compile dep.SmartRefreshHeader
+    //listview的adapter
+
+    compile dep.ListViewBaseAdapter
+    compile dep.glide
+    compile dep.hyphenate
+    compile dep.circleDialog
+    compile dep.acp
+
+    compile dep.PhotoView
+    //圆形imageview
+    compile dep.circleimageview
+    //瀑布流
+    compile dep.pullloadmorerecyclerview
+    compile dep.imagepicker
+    compile dep.banner
+    compile dep.eventbus
+    compile dep.viewcore
+    //点赞效果
+    compile dep.goodView
+    //高斯模糊
+    compile dep.EasyBlur
+
+    compile dep.preferenceV14
+/////////////////////////////////////
+    //控件
+    compile dep.autolayout
+    // Rx
+    compile dep.rxjava
+    compile dep.rxandroid
+    // Retrofit网络请求
+    compile dep.retrofit2old
+    compile dep.converterGson
+    compile dep.adapterRxjava
+    compile dep.gson
+    compile dep.materialishProgress
+    //ptr
+    compile dep.ultraPtr
+    //glide
+    compile dep.glideNew
+    compile dep.glideTransformations
+    //eventpost
+    compile dep.greenrobotEventbus
+    //okhttp
+    compile dep.loggingInterceptorOld
+    //log
+    compile dep.loggerOld
+    //lifeManager
+    compile dep.rxlifecycleComponents
+
+    compile dep.appcompat
+    compile dep.recyclerview
+    compile dep.cardview
+    compile dep.design
+    //沉浸式状态栏
+    compile dep.barlibrary
+}
+
+
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}

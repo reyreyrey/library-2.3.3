@@ -1,0 +1,129 @@
+apply plugin: 'com.android.application'
+apply from: '../gradle/global.gradle'
+apply from: '../gradle/simple.gradle'
+
+static def vercode() {
+    return Integer.parseInt(new Date().format("yyMMddHHmm"))
+}
+
+android {
+
+    compileSdkVersion sdkVersion
+    buildToolsVersion toolsVersion
+    defaultConfig {
+        applicationId packagename
+        minSdkVersion minVersion
+        targetSdkVersion tagVersion
+        multiDexEnabled true
+        versionCode vercode()
+        versionName autoVersionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [JPUSH_PKGNAME: packagename,
+                                JPUSH_APPKEY : jpush_appkey, //JPush上注册的包名对应的appkey.
+                                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+                                app_icon     : applogo,]
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        resValue "string", "AutoUpdateprovide", packagename + ".install_provider"
+        resValue "string", "tray__authority", packagename + ".com.yulecheng.main.tray"
+        resValue "string", "app_name", appName
+        buildConfigField "String", "SPLASH_PIC", "\"${splashPic}\""
+        buildConfigField "String", "show_splash_time", "\"${show_splash_time}\""
+
+        resValue "color", "colorPrimary", themeColor
+
+        //使用renderscript 兼容包
+        renderscriptTargetApi 25
+        renderscriptSupportModeEnabled true
+    }
+
+    useLibrary 'org.apache.http.legacy'
+    signingConfigs {
+        signingConfig {
+            keyAlias 'mj'
+            keyPassword 'Android1.0.0'
+            storeFile file('mj.jks')
+            storePassword 'Android1.0.0'
+            v2SigningEnabled false
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signingConfig
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signingConfig
+        }
+    }
+
+
+
+
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license'
+        exclude 'META-INF/license.txt'
+
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice'
+        exclude 'META-INF/notice.txt'
+
+        exclude 'META-INF/dependencies'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/ASL2.0'
+    }
+    dataBinding {
+        enabled = true
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    dexOptions {
+        dexInProcess true
+        preDexLibraries true
+        javaMaxHeapSize "4g"//越大越好
+        incremental true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    //修改生成的apk名字
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def outputFile = output.outputFile
+//            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                // 包名称
+////                def flavorName = variant.productFlavors[0].name
+//                // 版本名称
+//                def versionName = defaultConfig.versionName
+//
+//                def fileName = "${appName}_${versionName}.apk"
+//                def outDirectory = outputFile.parent
+//                output.outputFile = new File(outDirectory, fileName)
+//            }
+//        }
+//    }
+}

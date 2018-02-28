@@ -1,0 +1,250 @@
+allprojects {
+    repositories {
+//        jcenter()
+//        mavenCentral()
+//        maven { url "https://jitpack.io" }
+//        maven { url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository" }
+//        maven {
+//            url 'https://maven.google.com'
+//        }
+
+        maven { url "http://10.71.66.111:8081/repository/GoogleMaven/"}
+        maven { url "http://10.71.66.111:8081/repository/jcenter/"}
+        maven { url "http://10.71.66.111:8081/repository/jitpack/"}
+        maven { url "http://10.71.66.111:8081/repository/huanxin/"}
+        maven { url "http://10.71.66.111:8081/repository/maven-central/"}
+    }
+}
+
+ext {
+    compile = 27
+    buildTools = "27.0.3"
+    min = "16"
+    target = "27"
+    versionCode = 1
+    versionName = "0.0.1"
+
+    testRunner = "1.0.1"
+    junit = "4.12"
+    espresso = "3.0.0"
+    support = "25.3.1"
+    mockito = "2.10.0"
+    truth = "0.36"
+
+    circleDialog = "2.1.6"
+
+    constraint = "1.1.0-beta3"
+    lifecycle = "1.0.0"
+
+    okgo = "3.0.4"
+    findBugsJrs305 = "3.0.2"
+    okhttp3 = "3.9.0"
+    loggingInterceptorOld = "3.4.1"
+    okio = "1.13.0"
+    retrofit2 = "2.3.0"
+    retrofit2Old = "2.1.0"
+    gson = "2.8.2"
+    moshi = "1.5.0"
+    rxjava2 = "2.1.6"
+    rxandroid2 = "2.0.1"
+
+    rxjava = "1.2.1"
+    rxandroid = "1.1.0"
+
+    rxbinding = "2.0.0"
+    autolayout = "1.4.5"
+
+    rxlifecycleComponents = "1.0"
+
+    inject = "1"
+    javaxAnnotation = "1.3"
+    errorProne = "2.0.21"
+    jetAnnotations = "15.0"
+    dagger2 = "2.12"
+    autoValue = "1.5.1"
+
+    autoDispose = "0.4.0"
+    timber = "4.6.0"
+    permissions = "0.9.4"
+    parceler = "1.1.9"
+    glide = "3.6.1"
+    glideNew = "3.7.0"
+    leakcanary = "1.5.4"
+    multidex = "1.0.1"
+    phoenix = "2.0.0"
+    reflection = "0.9.6"
+
+    //add other dependency here
+    mAdapter = "1.0.2"
+    mGuava = "0.0.5"
+    mCommon = "0.0.5"
+    mPresentation = "0.0.5"
+    mData = "0.0.5"
+
+    circleDialog = "2.1.6"
+    barlibrary = "2.3.0"
+    acp = "1.1.7"
+
+    flurry = "7.0.0@aar"
+    jsoup = "1.7.2"
+
+    shortcutBadger = "1.1.18@aar"
+    tinker = "1.9.0"
+    tray = "0.12.0"
+
+    logger = "2.1.1"
+    loggerOld = "1.15"
+
+    litepal = "1.6.0"
+    daemon = "1.2.0"
+
+    jsoup = "1.7.2"
+    stetho = "1.5.0"
+
+    bmob = "3.5.8"
+    banner = "1.4.10"
+    bgabanner = "2.1.9@aar"
+
+    jpush = "3.0.9"
+    jcore = "1.1.7"
+
+    numberprogressbar = "1.4@aar"
+    leanCloud = "v4.6.0"
+    baseAdapter = "1.1.11"
+    viewcore = "0.2.2"
+    circleimageview = "2.2.0"
+    AndroidSpinKit = "1.1.0"
+    avoscloudPush = "v4.5.4@aar"
+    chatkit = "1.0.6"
+    SmartRefresh = "1.0.3"
+    imagepicker = "0.6.1"
+    eventbus = "1.0.5.1"
+    PhotoView = "2.1.3"
+    banner = "1.4.10"
+    hyphenate = "3.3.7"
+    pullloadmorerecyclerview = "1.1.2"
+    goodView = "1.0.0"
+    EasyBlur = "v1.0.0"
+    greenrobotEventbus = "3.0.0"
+    glideTransformations = "2.0.1"
+    ultraPtr = "1.0.11"
+    materialishProgress = "1.7"
+    dep = [
+            preferenceV14           : "com.android.support:preference-v14:$support",
+            autolayout              : "com.zhy:autolayout:$autolayout",
+            materialishProgress     : "com.pnikosis:materialish-progress:$materialishProgress",
+            ultraPtr                : "in.srain.cube:ultra-ptr:$ultraPtr",
+            glideTransformations    : "jp.wasabeef:glide-transformations:$glideTransformations",
+            greenrobotEventbus      : "org.greenrobot:eventbus:$greenrobotEventbus",
+            rxlifecycleComponents   : "com.trello:rxlifecycle-components:$rxlifecycleComponents",
+            EasyBlur                : "com.github.pinguo-zhouwei:EasyBlur:$EasyBlur",
+            goodView                : "com.wx.goodview:goodview:$goodView",
+            banner                  : "com.youth.banner:banner:$banner",
+            circleDialog            : "com.mylhyl:circleDialog:$circleDialog",
+            eventbus                : "org.simple:androideventbus:$eventbus",
+            appcompat               : "com.android.support:appcompat-v7:$support",
+            palette                 : "com.android.support:palette-v7:$support",
+            design                  : "com.android.support:design:$support",
+            cardview                : "com.android.support:cardview-v7:$support",
+            recyclerview            : "com.android.support:recyclerview-v7:$support",
+            constraint              : "com.android.support.constraint:constraint-layout:$constraint",
+            lifecycleReactivestreams: "android.arch.lifecycle:reactivestreams:$lifecycle",
+            lifecycleExtensions     : "android.arch.lifecycle:extensions:$lifecycle",
+            lifecycleJava8          : "android.arch.lifecycle:common-java8:$lifecycle",
+            lifecycleTest           : "android.arch.core:core-testing:$lifecycle",
+            findBugsJrs305          : "com.google.code.findbugs:jsr305:$findBugsJrs305",
+            okhttp3                 : "com.squareup.okhttp3:okhttp:$okhttp3",
+            loggingInterceptor      : "com.squareup.okhttp3:logging-interceptor:$okhttp3",
+            loggingInterceptorOld   : "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorOld",
+            okio                    : "com.squareup.okio:okio:$okio",
+            okgo                    : "com.lzy.net:okgo:$okgo",
+
+            retrofit2old            : "com.squareup.retrofit2:retrofit:$retrofit2Old",
+            converterGson           : "com.squareup.retrofit2:converter-gson:$retrofit2Old",
+            adapterRxjava          : "com.squareup.retrofit2:adapter-rxjava:$retrofit2Old",
+
+            retrofit2               : "com.squareup.retrofit2:retrofit:$retrofit2",
+            adapterRxjava2          : "com.squareup.retrofit2:adapter-rxjava2:$retrofit2",
+            converterMoshi          : "com.squareup.retrofit2:converter-moshi:$retrofit2",
+            moshi                   : "com.squareup.moshi:moshi:$moshi",
+            gson                    : "com.google.code.gson:gson:$gson",
+            rxjava2                 : "io.reactivex.rxjava2:rxjava:$rxjava2",
+            rxandroid2              : "io.reactivex.rxjava2:rxandroid:$rxandroid2",
+            rxjava                  : "io.reactivex:rxjava:$rxjava",
+            rxandroid               : "io.reactivex:rxandroid:$rxandroid",
+            autoDispose             : "com.uber.autodispose:autodispose:$autoDispose",
+            autoDisposeAndroid      : "com.uber.autodispose:autodispose-android:$autoDispose",
+            autoDisposeComponent    : "com.uber.autodispose:autodispose-android-archcomponents:$autoDispose",
+            annotationApi           : "javax.annotation:javax.annotation-api:$javaxAnnotation",
+            errorProne              : "com.google.errorprone:error_prone_annotations:$errorProne",
+            jetAnnotations          : "org.jetbrains:annotations:$jetAnnotations",
+            inject                  : "javax.inject:javax.inject:$inject",
+            autoValue               : "com.google.auto.value:auto-value:$autoValue",
+            autoValueCompiler       : "com.google.auto.value:auto-value:$autoValue",
+            dagger                  : "com.google.dagger:dagger:$dagger2",
+            daggerAndroid           : "com.google.dagger:dagger-android:$dagger2",
+            daggerAndroidSupport    : "com.google.dagger:dagger-android-support:$dagger2",
+            daggerCompiler          : "com.google.dagger:dagger-compiler:$dagger2",
+            daggerAndroidProcessor  : "com.google.dagger:dagger-android-processor:$dagger2",
+            rxPermissions           : "com.tbruyelle.rxpermissions2:rxpermissions:$permissions@aar",
+            parceler                : "org.parceler:parceler-api:$parceler",
+            parcelerProcessor       : "org.parceler:parceler:$parceler",
+            theAdapter              : "com.boo.arch:adapter:$mAdapter",
+            theData                 : "com.boo.arch:data:$mData",
+            theCommon               : "com.boo.arch:common:$mCommon",
+            thePresentation         : "com.boo.arch:presentation:$mPresentation",
+            theGuava                : "com.boo.arch:guava:$mGuava",
+            mockito                 : "org.mockito:mockito-core:$mockito",
+            truth                   : "com.google.truth:truth:$truth",
+            junit                   : "junit:junit:$junit",
+            testRunner              : "com.android.support.test:runner:$testRunner",
+            espresso                : "com.android.support.test.espresso:espresso-core:$espresso",
+            multidex                : "com.android.support:multidex:$multidex",
+            multidexInstrumentation : "com.android.support:multidex-instrumentation:$multidex",
+            timber                  : "com.jakewharton.timber:timber:$timber",
+            glide                   : "com.github.bumptech.glide:glide:$glide",
+            glideNew                : "com.github.bumptech.glide:glide:$glideNew",
+            glideProcessor          : "com.github.bumptech.glide:compiler:$glide",
+            processPhoenix          : "com.jakewharton:process-phoenix:$phoenix",
+            reflection              : "org.jooq:joor:$reflection",
+            leakcanary              : "com.squareup.leakcanary:leakcanary-android:$leakcanary",
+            leakcanaryNo            : "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary",
+            circleDialog            : "com.mylhyl:circleDialog:$circleDialog",
+            acp                     : "com.mylhyl:acp:$acp",
+            barlibrary              : "com.gyf.barlibrary:barlibrary:$barlibrary",
+            flurry                  : "com.flurry.android:analytics:$flurry",
+            rxbinding               : "com.jakewharton.rxbinding2:rxbinding:$rxbinding",
+            jsoup                   : "org.jsoup:jsoup:$jsoup",
+            shortcutBadger          : "me.leolin:ShortcutBadger:$shortcutBadger",
+            tinker                  : "com.tencent.tinker:tinker-android-lib:$tinker",
+            tinkerAnno              : "com.tencent.tinker:tinker-android-anno:$tinker",
+            tray                    : "net.grandcentrix.tray:tray:$tray",
+            logger                  : "com.orhanobut:logger:$logger",
+            loggerOld                  : "com.orhanobut:logger:$loggerOld",
+            litepal                 : "org.litepal.android:core:$litepal",
+            daemon                  : "com.evernote:android-job:$daemon",
+            jsoup                   : "org.jsoup:jsoup:$jsoup",
+            stetho                  : "com.facebook.stetho:stetho:$stetho",
+            bmob                    : "cn.bmob.android:bmob-sdk:$bmob",
+            banner                  : "com.youth.banner:banner:$banner",
+            jpush                   : "cn.jiguang.sdk:jpush:$jpush",
+            jcore                   : "cn.jiguang.sdk:jcore:$jcore",
+            bgabanner               : "cn.bingoogolapple:bga-banner:$bgabanner",
+            numberprogressbar       : "com.daimajia.numberprogressbar:library:$numberprogressbar",
+            leanCloud               : "cn.leancloud.android:avoscloud-sdk:$leanCloud",
+            avoscloudPush           : "cn.leancloud.android:avoscloud-push:$avoscloudPush",
+            chatkit                 : "cn.leancloud.android:chatkit:$chatkit",
+            ListViewBaseAdapter     : "com.joanzapata.android:base-adapter-helper:$baseAdapter",
+            viewcore                : "com.lzy.widget:view-core:$viewcore",
+            circleimageview         : "de.hdodenhof:circleimageview:$circleimageview",
+            AndroidSpinKit          : "com.github.ybq:Android-SpinKit:$AndroidSpinKit",
+            SmartRefreshLayout      : "com.scwang.smartrefresh:SmartRefreshLayout:$SmartRefresh",
+            SmartRefreshHeader      : "com.scwang.smartrefresh:SmartRefreshHeader:$SmartRefresh",
+            imagepicker             : "com.lzy.widget:imagepicker:$imagepicker",
+            hyphenate               : "com.hyphenate:hyphenate-sdk:$hyphenate",
+            PhotoView               : "com.github.chrisbanes:PhotoView:$PhotoView",
+            pullloadmorerecyclerview: "com.wuxiaolong.pullloadmorerecyclerview:library:$pullloadmorerecyclerview",
+
+    ]
+    //add other dependency in Array[]
+}

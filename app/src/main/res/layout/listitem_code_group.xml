@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCodeGroup"
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:padding="15px" />
+
+    <library.widget.ClickTextView
+        android:id="@+id/tvOperate"
+        android:layout_marginRight="15px"
+        android:layout_width="0px"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:background="@drawable/corner16_white"
+        android:paddingBottom="18px"
+        android:paddingLeft="18px"
+        android:paddingRight="18px"
+        android:text="…"
+        android:textColor="@color/main_normal_black_color"
+        android:textSize="46px" />
+</LinearLayout>

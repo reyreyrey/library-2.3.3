@@ -1,0 +1,62 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">172dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="drawer_header_icon">68dp</dimen>
+
+    <dimen name="spacing">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="elevation">4dp</dimen>
+    <dimen name="souvenir_height">240dp</dimen>
+    <dimen name="textsize">28sp</dimen>
+    <dimen name="line_spacing">2dp</dimen>
+    <dimen name="icon_padding">2dp</dimen>
+    <dimen name="user_img_small">36dp</dimen>
+    <dimen name="icon_spacing">4dp</dimen>
+
+    <dimen name="font_size_big">20dp</dimen>
+    <dimen name="font_size_toolbar">20dp</dimen>
+    <dimen name="font_size">16dp</dimen>
+    <dimen name="font_size_small">14dp</dimen>
+    <dimen name="font_size_smaller">12dp</dimen>
+    <dimen name="font_size_smallest">10dp</dimen>
+    <dimen name="gudieview_width">6dp</dimen>
+    <dimen name="gudieview_heigh">6dp</dimen>
+    <dimen name="recorder_font_size">15dp</dimen>
+
+    <dimen name="margin_top">23dp</dimen>
+    <dimen name="font_size_middle">16dp</dimen>
+
+    <dimen name="main_page_icon_size">50dp</dimen>
+
+
+
+    <!--走势图中双色球的宽高-->
+    <dimen name="trend_ball_wh">16.66666666666667dp</dimen>
+    <dimen name="item_wh">33.33333333333333dp</dimen>
+    <dimen name="footer_itemwh">25dp</dimen>
+
+
+
+
+
+    <dimen name="trend_x_item_width">33dp</dimen>
+    <dimen name="trend_x_item_name_width">44dp</dimen>
+    <dimen name="trend_x_item_height">33dp</dimen>
+    <dimen name="trend_y_item_width">60dp</dimen>
+    <dimen name="trend_y_item_height">33dp</dimen>
+    <dimen name="trend_x_text_size">14dp</dimen>
+    <dimen name="trend_y_text_size">12dp</dimen>
+    <dimen name="trend_content_text_size">14dp</dimen>
+    <dimen name="trend_corner_text_size">14dp</dimen>
+    <dimen name="trend_ball_radius">12dp</dimen>
+    <dimen name="trend_sulcus_width">6dp</dimen>
+    <dimen name="trend_sulcus_height">6dp</dimen>
+    <dimen name="trend_sulcus_bottom">9dp</dimen>
+    <dimen name="trend_time_height">26dp</dimen>
+</resources>

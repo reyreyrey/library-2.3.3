@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/toolbar" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/luckybg">
+
+            <LinearLayout
+                android:id="@+id/view_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="45dp"
+                android:orientation="vertical"
+                android:overScrollMode="never">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="点击测试一下今天的运势吧"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+
+
+                <RelativeLayout
+                    android:layout_width="316dp"
+                    android:layout_height="316dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="48dp">
+
+                    <com.android.library.views.luckymonkeypanel.LuckyMonkeyPanelView
+                        android:id="@+id/lucky_panel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <Button
+                        android:id="@+id/btn_action"
+                        android:layout_width="82dp"
+                        android:layout_height="82dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/bg_lucky_monkey_go"
+                        android:text="Go"
+                        android:textColor="#4d1c01"
+                        android:textSize="34dp" />
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="测试结果仅供参考"
+                    android:textColor="@android:color/white"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</layout>

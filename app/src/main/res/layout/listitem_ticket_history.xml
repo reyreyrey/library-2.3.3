@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ticketsystem.ui.widget.FocuseRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?selectableItemBackground"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30px">
+
+        <TextView
+            android:id="@+id/tvOpenSerial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="201705期开奖结果"
+            android:textColor="@color/main_black_color_333333"
+            android:textSize="44px" />
+
+
+        <TextView
+            android:id="@+id/tvOpenTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="09月07日（周四）开奖"
+            android:textColor="@color/main_black_color_333333"
+            android:textSize="44px" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvOpenResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlTime"
+        android:layout_marginBottom="30px"
+        android:padding="15px" />
+</ticketsystem.ui.widget.FocuseRelativeLayout>

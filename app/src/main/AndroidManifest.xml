@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.library">
+
+    <!--允许联网 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--获取wifi网络状态的信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--获取sd卡写的权限，用于文件上传和下载-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--允许读取手机状态 用于创建BmobInstallation-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- Required -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
+    <application android:allowBackup="true">
+        <activity
+            android:name="com.android.lotto.lottery.LottoTrendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.TrendChartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.GuideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.ChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.XiaohuaActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.CheckUpdateActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.FeedbackActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.AboutActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.ManhuaDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.ManhuaListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.WXMeiwenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.XiaohuaDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.GuigushiActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.PostListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.RegisterActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.AddPostActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.MyAttentionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.EditUserMessageActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="com.android.library.ui.OtherUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.SearchActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.MySaveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.MyFabuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.MineActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.CommentListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+
+        <activity
+            android:name="com.android.library.ui.LoginActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.PostDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.GuigushiDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.ArtActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.FuliActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="com.android.library.ui.FanActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="com.android.library.ui.SystemNotifyActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="com.android.library.ui.SystemNotifyDetailActivity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name="com.android.trend.ui.TrendActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.library.ui.LuckPanelActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.android.library.ui.ChatListActivity"
+            android:screenOrientation="portrait" />
+
+
+        <service android:name="com.android.webview.x5.download.download.DownloadAppService" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="@string/AutoUpdateprovide"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
+        <!-- 设置环信应用的AppKey -->
+        <meta-data
+            android:name="EASEMOB_APPKEY"
+            android:value="1105180110115260#xy-28" />
+        <!-- 声明SDK所需的service SDK核心功能-->
+        <service
+            android:name="com.hyphenate.chat.EMChatService"
+            android:exported="true" />
+        <service
+            android:name="com.hyphenate.chat.EMJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- 声明SDK所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <!-- 显示下载大图页面 -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+        <!-- 下载文件 -->
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowNormalFileActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide" />
+        <activity
+            android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+
+        <activity
+            android:name="ticketsystem.ui.LibraryMainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="ticketsystem.ui.follow.FollowAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.follow.FollowSortActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.trendanalysis.AverageSimulateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.OpenResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.trendanalysis.ParityTrendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.trendanalysis.AvgAnalysisActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.trendanalysis.SumAnalysisActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.trendanalysis.CodeRateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.trendanalysis.CodeGenerateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.trendanalysis.CodeBaseSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.trendanalysis.CodeForecastActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.web.WebActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ticketsystem.ui.HistoryActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="design_width"
+            android:value="1080" />
+        <meta-data
+            android:name="design_height"
+            android:value="1920" />
+
+
+    </application>
+
+</manifest>

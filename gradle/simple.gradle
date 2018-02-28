@@ -1,0 +1,19 @@
+ext{
+    //app名字
+    appName = "北京赛车"
+    //app启动页图片(必须在drawable文件夹中)
+    splashPic = "splash_360"
+    //app包名
+    packagename = "com.vip.bjsc.android"
+    //推送key
+    jpush_appkey = "8066bd281863db6c40a41c89"
+    //app版本名
+    autoVersionName = "1.1.4"
+    //主题色
+    themeColor = "#342e32"
+    //应用图标
+    applogo = "@mipmap/logo_bjsc"
+    //显示正常splash的时间
+    show_splash_time = "2018-01-06 17:00:00"
+}
+
