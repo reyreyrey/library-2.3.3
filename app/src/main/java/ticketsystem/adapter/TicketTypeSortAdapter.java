@@ -71,14 +71,16 @@ public class TicketTypeSortAdapter extends RecyclerView.Adapter<TicketTypeSortAd
             tvTicketName.setText(typeInfo.descr);
             rlFollow.setSelected(true);
             tvFollow.setText("已关注");
-            rlFollow.setOnClickListener(v -> {
-                if (mTicketTypeList.contains(typeInfo)) {
-                    int position = mTicketTypeList.indexOf(typeInfo);
-                    mTicketTypeList.remove(typeInfo);
-                    notifyItemRemoved(position);
+            rlFollow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mTicketTypeList.contains(typeInfo)) {
+                        int position = mTicketTypeList.indexOf(typeInfo);
+                        mTicketTypeList.remove(typeInfo);
+                        notifyItemRemoved(position);
+                    }
                 }
             });
-
         }
     }
 

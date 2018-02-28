@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.library.R;
@@ -69,14 +70,22 @@ public class CodeBaseSelectActivity extends BaseTitleBarActivity {
 
     @Override
     protected void setListener() {
-        tvClear.setOnClickListener(v -> codeBaseAdapter.getSelectedList().clear());
-        tvConfirm.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("codeBase", (Serializable) codeBaseAdapter.getSelectedList());
-            intent.putExtras(bundle);
-            setResult(RESULT_NUMBER_BASE, intent);
-            finish();
+        tvClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                codeBaseAdapter.getSelectedList().clear();
+            }
+        });
+        tvConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("codeBase", (Serializable) codeBaseAdapter.getSelectedList());
+                intent.putExtras(bundle);
+                setResult(RESULT_NUMBER_BASE, intent);
+                finish();
+            }
         });
     }
 

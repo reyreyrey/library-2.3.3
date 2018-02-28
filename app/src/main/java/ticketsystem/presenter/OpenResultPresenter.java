@@ -2,8 +2,13 @@ package ticketsystem.presenter;
 
 import android.app.Activity;
 
+import java.util.List;
+
+import library.model.ListData;
 import ticketsystem.api.DataManager;
 import ticketsystem.base.BasePresenter;
+import ticketsystem.base.OnSubscribeSuccess;
+import ticketsystem.bean.TicketOpenData;
 import ticketsystem.bean.TicketRegular;
 import ticketsystem.manager.TicketRegularManager;
 import ticketsystem.presenter.view.IOpenResultView;
@@ -23,8 +28,13 @@ public class OpenResultPresenter extends BasePresenter<IOpenResultView> {
     }
 
     public void getSingleOpenResult(String code, String issue) {
-        addSubscribe(DataManager.getSinglePeroidCheck(code, issue).subscribe(getSubscriber(ticketOpenDataTicketInfo ->
-                mView.getSingleOpenResultSuccess(ticketOpenDataTicketInfo.list.get(0))
+        addSubscribe(DataManager.getSinglePeroidCheck(code, issue).subscribe(getSubscriber(new OnSubscribeSuccess<ListData<TicketOpenData>>() {
+                                                                                               @Override
+                                                                                               public void onSuccess(ListData<TicketOpenData> ticketOpenDataListData) {
+                                                                                                   mView.getSingleOpenResultSuccess(ticketOpenDataListData.list.get(0));
+                                                                                               }
+                                                                                           }
+
         )));
     }
 
@@ -33,12 +43,15 @@ public class OpenResultPresenter extends BasePresenter<IOpenResultView> {
             mView.getRegularSuccess(mTicketRegular);
             return;
         }
-        addSubscribe(TicketRegularManager.getTicketDataManager().getTicketRegularList().subscribe(getSubscriberNoProgress(ticketRegulars -> {
-            for (TicketRegular ticketRegular : ticketRegulars) {
-                if (ticketRegular.code.equals(code)) {
-                    mTicketRegular = ticketRegular;
-                    mView.getRegularSuccess(mTicketRegular);
-                    break;
+        addSubscribe(TicketRegularManager.getTicketDataManager().getTicketRegularList().subscribe(getSubscriberNoProgress(new OnSubscribeSuccess<List<TicketRegular>>() {
+            @Override
+            public void onSuccess(List<TicketRegular> ticketRegulars) {
+                for (TicketRegular ticketRegular : ticketRegulars) {
+                    if (ticketRegular.code.equals(code)) {
+                        mTicketRegular = ticketRegular;
+                        mView.getRegularSuccess(mTicketRegular);
+                        break;
+                    }
                 }
             }
         })));

@@ -4,20 +4,21 @@ buildscript {
         mavenCentral()
         maven { url "https://jitpack.io" }
         maven { url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository" }
-       maven {
-           url 'https://maven.google.com'
-       }
+        maven {
+            url 'https://maven.google.com'
+        }
 
-       // maven { url "http://10.71.66.111:8081/repository/GoogleMaven/"}
-        //maven { url "http://10.71.66.111:8081/repository/jcenter/"}
-        //maven { url "http://10.71.66.111:8081/repository/jitpack/"}
-        //maven { url "http://10.71.66.111:8081/repository/huanxin/"}
-        //maven { url "http://10.71.66.111:8081/repository/maven-central/"}
+//        maven { url "http://10.71.66.111:8081/repository/GoogleMaven/"}
+//        maven { url "http://10.71.66.111:8081/repository/jcenter/"}
+//        maven { url "http://10.71.66.111:8081/repository/jitpack/"}
+//        maven { url "http://10.71.66.111:8081/repository/huanxin/"}
+//        maven { url "http://10.71.66.111:8081/repository/maven-central/"}
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
     }
 }
 

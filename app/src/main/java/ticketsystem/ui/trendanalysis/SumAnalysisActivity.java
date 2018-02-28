@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import charting.charts.LineChart;
+import charting.components.AxisBase;
 import charting.data.Entry;
 import charting.data.LineData;
 import charting.data.LineDataSet;
+import charting.formatter.IAxisValueFormatter;
 import charting.highlight.Highlight;
 import charting.interfaces.datasets.ILineDataSet;
 import ticketsystem.base.BaseTitleBar;
@@ -102,13 +104,21 @@ public class SumAnalysisActivity extends BaseTitleBarActivity<ParityTrendPresent
                             "和值分布"));
             lineData = new LineData(dataSetList);
             lcParityTrend.setData(lineData);
-            lcParityTrend.getXAxis().setValueFormatter((value, axis) -> {
-                if (value >= 0 && list.size() > value)
-                    return list.get((int) value).expect + "期";
-                else
-                    return "0";
+            lcParityTrend.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    if (value >= 0 && list.size() > value)
+                        return list.get((int) value).expect + "期";
+                    else
+                        return "0";
+                }
             });
-            lcParityTrend.getAxisLeft().setValueFormatter((value, axis) -> value + "");
+            lcParityTrend.getAxisLeft().setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    return value + "";
+                }
+            });
             lcParityTrend.setMarker(new DataMarkView(this, new DataMarkView.IDataValueFormat() {
                 @Override
                 public String format(Entry e, Highlight highlight) {

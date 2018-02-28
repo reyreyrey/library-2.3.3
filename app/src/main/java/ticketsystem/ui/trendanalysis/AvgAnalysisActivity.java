@@ -12,10 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import charting.charts.BarChart;
+import charting.components.AxisBase;
 import charting.data.BarData;
 import charting.data.BarDataSet;
 import charting.data.BarEntry;
 import charting.data.Entry;
+import charting.formatter.IAxisValueFormatter;
 import charting.highlight.Highlight;
 import charting.interfaces.datasets.IBarDataSet;
 import ticketsystem.base.BaseTitleBar;
@@ -105,11 +107,14 @@ public class AvgAnalysisActivity extends BaseTitleBarActivity<ParityTrendPresent
             IBarDataSet barDataSet = BarChartHelper.getBarChartHelper().generateBarDataSet(generateEntry(list, codeLength), new String[]{"均值图"}, colorList);
             barData = new BarData(barDataSet);
             bcAvgAnalysis.setData(barData);
-            bcAvgAnalysis.getXAxis().setValueFormatter((value, axis) -> {
-                if (value == codeLength - 1) {
-                    return "和平均";
-                } else {
-                    return (1 + (int) value) + "号";
+            bcAvgAnalysis.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    if (value == codeLength - 1) {
+                        return "和平均";
+                    } else {
+                        return (1 + (int) value) + "号";
+                    }
                 }
             });
 //            bcAvgAnalysis.getAxisLeft().setValueFormatter((value, axis) -> (value));

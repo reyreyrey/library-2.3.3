@@ -19,7 +19,12 @@ public class Dao {
         if (mApiService == null) {
             synchronized (Dao.class) {
                 if (mApiService == null) {
-                    mApiService = RetrofitDao.buildRetrofit(builder -> buildPublicParams(builder)).create(ApiService.class);
+                    mApiService = RetrofitDao.buildRetrofit(new RetrofitDao.IBuildPublicParams() {
+                        @Override
+                        public HttpUrl.Builder buildPublicParams(HttpUrl.Builder builder) {
+                            return buildPublicParams(builder);
+                        }
+                    }).create(ApiService.class);
                 }
             }
         }

@@ -10,12 +10,15 @@ import com.android.library.R;
 
 import charting.charts.BarChart;
 import charting.charts.LineChart;
+import charting.components.AxisBase;
 import charting.data.BarData;
 import charting.data.BarDataSet;
 import charting.data.BarEntry;
 import charting.data.Entry;
 import charting.data.LineData;
 import charting.data.LineDataSet;
+import charting.formatter.IAxisValueFormatter;
+import charting.highlight.Highlight;
 import charting.interfaces.datasets.IBarDataSet;
 import charting.interfaces.datasets.ILineDataSet;
 import ticketsystem.base.BaseTitleBar;
@@ -120,20 +123,30 @@ public class ParityTrendActivity extends BaseTitleBarActivity<ParityTrendPresent
             }
             lineData = new LineData(dataSetList);
             lcParityTrend.setData(lineData);
-            lcParityTrend.getXAxis().setValueFormatter((value, axis) -> {
-                if (value >= 0 && list.size() > value)
-                    return list.get((int) value).expect + "期";
-                else
-                    return "0";
+            lcParityTrend.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    if (value >= 0 && list.size() > value)
+                        return list.get((int) value).expect + "期";
+                    else
+                        return "0";
+                }
             });
-            lcParityTrend.setMarker(new DataMarkView(this, (e, highlight) -> {
-                if (e.getX() >= 0 && list.size() > e.getX())
-                    return list.get((int) e.getX()).expect + "期：" + (e.getY() % 2 == 1 ? "奇" : "偶");
-                else
-                    return "0";
-
+            lcParityTrend.setMarker(new DataMarkView(this, new DataMarkView.IDataValueFormat() {
+                @Override
+                public String format(Entry e, Highlight highlight) {
+                    if (e.getX() >= 0 && list.size() > e.getX())
+                        return list.get((int) e.getX()).expect + "期：" + (e.getY() % 2 == 1 ? "奇" : "偶");
+                    else
+                        return "0";
+                }
             }));
-            lcParityTrend.getAxisLeft().setValueFormatter((value, axis) -> value % 2 == 1 ? "奇" : "偶");
+            lcParityTrend.getAxisLeft().setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    return value % 2 == 1 ? "奇" : "偶";
+                }
+            });
         }
         lcParityTrend.animateX(3000);
     }

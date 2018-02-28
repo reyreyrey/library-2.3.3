@@ -3,6 +3,7 @@ package ticketsystem.ui.follow;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
@@ -83,9 +84,14 @@ public class TicketTypeFollowAddFragment extends BaseFuncFragment {
 
     @Override
     public void setListener() {
-        ticketTypeAdapter.setOnItemClickListener(view ->
+        ticketTypeAdapter.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 LaunchUtil.launchActivity(getActivity(), OpenResultActivity.class,
-                        OpenResultActivity.buildBundle((TicketType) view.getTag())));
+                        OpenResultActivity.buildBundle((TicketType) view.getTag()));
+            }
+        });
+
     }
 
     @Subscribe

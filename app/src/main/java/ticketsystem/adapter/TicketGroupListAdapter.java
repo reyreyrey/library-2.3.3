@@ -94,8 +94,11 @@ public class TicketGroupListAdapter extends RecyclerView.Adapter<TicketGroupList
                     return false;
                 }
             });
-            tvOperate.setOnClickListener(v -> {
-                popupMenu.show();
+            tvOperate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    popupMenu.show();
+                }
             });
         }
     }

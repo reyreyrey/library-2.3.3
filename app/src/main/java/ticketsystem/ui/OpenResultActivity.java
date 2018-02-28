@@ -3,12 +3,14 @@ package ticketsystem.ui;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 
 import com.android.library.R;
 
 import library.util.TimeUtils;
+import rx.functions.Action1;
 import ticketsystem.adapter.OpenCodeAdapter;
 import ticketsystem.base.BaseTitleBar;
 import ticketsystem.base.BaseTitleBarActivity;
@@ -95,45 +97,71 @@ public class OpenResultActivity extends BaseTitleBarActivity<OpenResultPresenter
 
     @Override
     protected void setListener() {
-        tvHistory.setOnClickListener(v ->
-        {
-            if (mTicketType == null) {
-                finish();
-            } else {
-                LaunchUtil.launchActivity(this, HistoryActivity.class, HistoryActivity.buildBundle(mTicketType));
+        tvHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mTicketType == null) {
+                    finish();
+                } else {
+                    LaunchUtil.launchActivity(OpenResultActivity.this, HistoryActivity.class, HistoryActivity.buildBundle(mTicketType));
+                }
             }
-
         });
         /**
          * 奇偶趋势分析
          */
         ClickView(findView(R.id.tvParityTrend))
-                .subscribe(o -> LaunchUtil.launchActivity(this, ParityTrendActivity.class,
-                        ParityTrendActivity.buildBundle(mTicketType)));
+                .subscribe(new Action1() {
+                    @Override
+                    public void call(Object o) {
+                        LaunchUtil.launchActivity(OpenResultActivity.this, ParityTrendActivity.class,
+                                ParityTrendActivity.buildBundle(mTicketType));
+                    }
+                });
 
         /**
          * 均值分析
          */
         ClickView(findView(R.id.tvAvgAnalysis))
-                .subscribe(o -> LaunchUtil.launchActivity(this, AvgAnalysisActivity.class,
-                        AvgAnalysisActivity.buildBundle(mTicketType)));
+                .subscribe(new Action1() {
+                    @Override
+                    public void call(Object o) {
+                        LaunchUtil.launchActivity(OpenResultActivity.this, AvgAnalysisActivity.class,
+                                AvgAnalysisActivity.buildBundle(mTicketType));
+                    }
+                });
         /**
          * 和值分析
          */
         ClickView(findView(R.id.tvSumAnalysis))
-                .subscribe(o -> LaunchUtil.launchActivity(this, SumAnalysisActivity.class,
-                        SumAnalysisActivity.buildBundle(mTicketType)));
+                .subscribe(new Action1() {
+                    @Override
+                    public void call(Object o) {
+                        LaunchUtil.launchActivity(OpenResultActivity.this, SumAnalysisActivity.class,
+                                SumAnalysisActivity.buildBundle(mTicketType));
+                    }
+                });
         /**
          * 号码频率
          */
         ClickView(findView(R.id.tvNumRate))
-                .subscribe(o -> LaunchUtil.launchActivity(this, CodeRateActivity.class,
-                        CodeRateActivity.buildBundle(mTicketType)));
+                .subscribe(new Action1() {
+                    @Override
+                    public void call(Object o) {
+                        LaunchUtil.launchActivity(OpenResultActivity.this, CodeRateActivity.class,
+                                CodeRateActivity.buildBundle(mTicketType));
+                    }
+                });
         /**
          * 均值演算
          */
         ClickView(findView(R.id.tvAvgSimulate))
-                .subscribe(o -> LaunchUtil.launchActivity(this, AverageSimulateActivity.class));
+                .subscribe(new Action1() {
+                    @Override
+                    public void call(Object o) {
+                        LaunchUtil.launchActivity(OpenResultActivity.this, AverageSimulateActivity.class);
+                    }
+                });
     }
 
     @Override
@@ -148,12 +176,22 @@ public class OpenResultActivity extends BaseTitleBarActivity<OpenResultPresenter
     @Override
     public void getRegularSuccess(TicketRegular ticketRegular) {
         ClickView(findView(R.id.tvRandomNum))
-                .subscribe(o -> LaunchUtil.launchActivity(this, CodeGenerateActivity.class,
-                        CodeGenerateActivity.buildBundle(ticketRegular)));
+                .subscribe(new Action1() {
+                    @Override
+                    public void call(Object o) {
+                        LaunchUtil.launchActivity(OpenResultActivity.this, CodeGenerateActivity.class,
+                                CodeGenerateActivity.buildBundle(ticketRegular));
+                    }
+                });
         /**
          * 号码预测
          */
         ClickView(findView(R.id.tvNumberForecast))
-                .subscribe(o -> LaunchUtil.launchActivity(this, CodeForecastActivity.class, CodeForecastActivity.buildBundle(ticketRegular)));
+                .subscribe(new Action1() {
+                    @Override
+                    public void call(Object o) {
+                        LaunchUtil.launchActivity(OpenResultActivity.this, CodeForecastActivity.class, CodeForecastActivity.buildBundle(ticketRegular));
+                    }
+                });
     }
 }

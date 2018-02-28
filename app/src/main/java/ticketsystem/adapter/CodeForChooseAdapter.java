@@ -108,21 +108,24 @@ public class CodeForChooseAdapter extends RecyclerView.Adapter<CodeForChooseAdap
                 tvCode.setBackground(mContext.getResources().getDrawable(R.drawable.select_code_bg_shape_red));
             }
             tvCode.setText(data);
-            tvCode.setOnClickListener(v -> {
-                if (v.isSelected()) {
-                    v.setSelected(false);
-                    mSelectedCodes.set(mSelectedCodes.indexOf(data), "");
-                    if (mOnClickListener != null) {
-                        mOnClickListener.onClick(v);
+            tvCode.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (v.isSelected()) {
+                        v.setSelected(false);
+                        mSelectedCodes.set(mSelectedCodes.indexOf(data), "");
+                        if (mOnClickListener != null) {
+                            mOnClickListener.onClick(v);
+                        }
+                        notifyDataSetChanged();
+                    } else {
+                        v.setSelected(true);
+                        mSelectedCodes.set(findEmptyIndex(mSelectedCodes), data);
+                        if (mOnClickListener != null) {
+                            mOnClickListener.onClick(v);
+                        }
+                        notifyDataSetChanged();
                     }
-                    notifyDataSetChanged();
-                } else {
-                    v.setSelected(true);
-                    mSelectedCodes.set(findEmptyIndex(mSelectedCodes), data);
-                    if (mOnClickListener != null) {
-                        mOnClickListener.onClick(v);
-                    }
-                    notifyDataSetChanged();
                 }
             });
         }

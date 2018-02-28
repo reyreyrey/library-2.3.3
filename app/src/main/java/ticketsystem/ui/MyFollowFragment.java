@@ -3,6 +3,7 @@ package ticketsystem.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
@@ -18,6 +19,7 @@ import library.listview.ListGroupPresenter;
 import library.listview.listview.RecycleListViewImpl;
 import library.listview.manager.BaseGroupListManager;
 import library.model.Event;
+import rx.functions.Action1;
 import ticketsystem.adapter.TicketRecentOpenAdapter;
 import ticketsystem.base.BaseFuncFragment;
 import ticketsystem.bean.TicketType;
@@ -82,15 +84,21 @@ public class MyFollowFragment extends BaseFuncFragment {
 
     @Override
     public void setListener() {
-        ClickView(findView(R.id.tvAdd)).subscribe(o -> LaunchUtil.launchActivity(getActivity(), FollowAddActivity.class));
-        ticketRecentOpenAdapter.setOnItemClickListener(view ->
+        ClickView(findView(R.id.tvAdd)).subscribe(new Action1() {
+            @Override
+            public void call(Object o) {
+                LaunchUtil.launchActivity(getActivity(), FollowAddActivity.class);
+            }
+        });
+        ticketRecentOpenAdapter.setOnItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 LaunchUtil.launchActivity(getActivity(), OpenResultActivity.class,
-                        OpenResultActivity.buildBundle((TicketType) view.getTag())));
+                        OpenResultActivity.buildBundle((TicketType) view.getTag()));
+            }
+        });
 
-//        ClickView(findView(R.id.ivHint)).subscribe(o -> ToastUtil.showToast("由于数据来源问题，开奖数据会有2-6分钟的延迟！"));
-//        ClickView(findView(R.id.ivLocation))
-//                .subscribe(o -> LaunchUtil.launchDefaultWeb(getActivity(),
-//                        "http://map.baidu.com/mobile/webapp/search/search/qt=s&wd=%E5%BD%A9%E7%A5%A8&newmap=1&ie=utf-8&c=194/vt=map", ""));
+
     }
 
     @Override

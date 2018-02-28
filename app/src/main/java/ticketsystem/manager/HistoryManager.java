@@ -6,6 +6,8 @@ import android.content.Context;
 import library.listview.manager.BaseGroupListManager;
 import library.model.ListData;
 import library.util.TimeUtils;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import ticketsystem.api.DataManager;
 import ticketsystem.bean.TicketOpenData;
 import rx.Observable;
@@ -32,13 +34,18 @@ public class HistoryManager extends BaseGroupListManager<TicketOpenData> {
             endTimeMill = System.currentTimeMillis();
         }
         return DataManager.getMutiPeriodCheck(mCode, PAGE_SIZE, TimeUtils.milliseconds2String(endTimeMill))
-                .flatMap(ticketOpenDataListData -> {
-                    ticketOpenDataListData.size = ticketOpenDataListData.list.size() + 1000;
-                    return Observable.just(ticketOpenDataListData);
-                })
-                .doOnNext(ticketOpenDataListData -> {
-                    int size = ticketOpenDataListData.list.size();
-                    endTimeMill = (ticketOpenDataListData.list.get(size - 1).timestamp - 1) * 1000;
+                .flatMap(new Func1<ListData<TicketOpenData>, Observable<ListData<TicketOpenData>>>() {
+                    @Override
+                    public Observable<ListData<TicketOpenData>> call(ListData<TicketOpenData> ticketOpenDataListData) {
+                        ticketOpenDataListData.size = ticketOpenDataListData.list.size() + 1000;
+                        return Observable.just(ticketOpenDataListData);
+                    }
+                }).doOnNext(new Action1<ListData<TicketOpenData>>() {
+                    @Override
+                    public void call(ListData<TicketOpenData> ticketOpenDataListData) {
+                        int size = ticketOpenDataListData.list.size();
+                        endTimeMill = (ticketOpenDataListData.list.get(size - 1).timestamp - 1) * 1000;
+                    }
                 });
     }
 

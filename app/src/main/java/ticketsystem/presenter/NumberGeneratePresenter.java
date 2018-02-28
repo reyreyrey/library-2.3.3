@@ -6,6 +6,7 @@ import android.app.Activity;
 import java.util.List;
 
 import ticketsystem.base.BasePresenter;
+import ticketsystem.base.OnSubscribeSuccess;
 import ticketsystem.bean.TicketRegular;
 import ticketsystem.presenter.view.INumberGenerateView;
 import ticketsystem.utils.NumberGenerateHelper;
@@ -26,8 +27,12 @@ public class NumberGeneratePresenter extends BasePresenter<INumberGenerateView> 
     }
 
     public void generaterNumber(List<List<String>> numberBase) {
-        addSubscribe(numberGenerateHelper.generateNumberGroup(numberBase).subscribe(getSubscriberNoProgress(t ->
-                mView.onGenerateDataSuccess(t)
+        addSubscribe(numberGenerateHelper.generateNumberGroup(numberBase).subscribe(getSubscriberNoProgress(new OnSubscribeSuccess<String>() {
+                                                                                                                @Override
+                                                                                                                public void onSuccess(String s) {
+                                                                                                                    mView.onGenerateDataSuccess(s);
+                                                                                                                }
+                                                                                                            }
         )));
     }
 

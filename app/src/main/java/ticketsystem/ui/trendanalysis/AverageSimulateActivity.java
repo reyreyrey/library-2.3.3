@@ -6,6 +6,8 @@ import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -68,27 +70,33 @@ public class AverageSimulateActivity extends BaseTitleBarActivity {
 
     @Override
     protected void setListener() {
-        etNumberEdit.setOnEditorActionListener((v, actionId, event) -> {
-            if (TextUtils.isEmpty(etNumberEdit.getText())) {
-                return true;
-            }
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (numberList.contains(Integer.valueOf(etNumberEdit.getText().toString()))) {
-                    Toast.makeText(AverageSimulateActivity.this, "已经添加过该数据", Toast.LENGTH_LONG).show();
+        etNumberEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (TextUtils.isEmpty(etNumberEdit.getText())) {
                     return true;
                 }
-                numberList.add(Integer.valueOf(etNumberEdit.getText().toString()));
-                codeListAdapter.notifyDataSetChanged();
-                etNumberEdit.setText("");
-                return true;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    if (numberList.contains(Integer.valueOf(etNumberEdit.getText().toString()))) {
+                        Toast.makeText(AverageSimulateActivity.this, "已经添加过该数据", Toast.LENGTH_LONG).show();
+                        return true;
+                    }
+                    numberList.add(Integer.valueOf(etNumberEdit.getText().toString()));
+                    codeListAdapter.notifyDataSetChanged();
+                    etNumberEdit.setText("");
+                    return true;
+                }
+                return false;
             }
-            return false;
         });
-        tvGenerate.setOnClickListener(v -> {
-            tvGenerate.setEnabled(false);
-            calculateData(numberList, TextUtils.isEmpty(etAllNum.getText().toString()) ? "0" : etAllNum.getText().toString(),
-                    TextUtils.isEmpty(etChooseSize.getText().toString()) ? "0" : etChooseSize.getText().toString(),
-                    TextUtils.isEmpty(etGenerateNum.getText().toString()) ? "0" : etGenerateNum.getText().toString(), cbRepeat.isChecked());
+        tvGenerate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvGenerate.setEnabled(false);
+                calculateData(numberList, TextUtils.isEmpty(etAllNum.getText().toString()) ? "0" : etAllNum.getText().toString(),
+                        TextUtils.isEmpty(etChooseSize.getText().toString()) ? "0" : etChooseSize.getText().toString(),
+                        TextUtils.isEmpty(etGenerateNum.getText().toString()) ? "0" : etGenerateNum.getText().toString(), cbRepeat.isChecked());
+            }
         });
     }
 
@@ -164,7 +172,12 @@ public class AverageSimulateActivity extends BaseTitleBarActivity {
         titleBar.setTitleText("均值演算");
         ivRight = (ImageView) titleBar.right;
         ivRight.setImageResource(android.R.drawable.ic_dialog_info);
-        ivRight.setOnClickListener(v -> ToastUtil.showToast("本页面模拟开奖,求数据平均值，后续将根据不同彩种的规则来做，" +
-                "如果您是老彩民，需要加入一些特别的计算方式，请联系QQ 719243738"));
+        ivRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ToastUtil.showToast("本页面模拟开奖,求数据平均值，后续将根据不同彩种的规则来做，" +
+                        "如果您是老彩民，需要加入一些特别的计算方式，请联系QQ 719243738");
+            }
+        });
     }
 }

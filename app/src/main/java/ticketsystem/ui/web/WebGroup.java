@@ -10,6 +10,7 @@ import com.android.library.R;
 import library.app.AppContext;
 import library.app.ReturnCode;
 import library.listview.loading.IGroupLoadingHelp;
+import library.listview.loading.OnFailClickListener;
 
 
 /**
@@ -35,19 +36,27 @@ public class WebGroup {
 
     protected void initWebGroup() {
         loadingHelp.createLoadingPage((RelativeLayout) contentView);
-        loadingHelp.setOnFailClickListener(failCode -> request(config.url));
+        loadingHelp.setOnFailClickListener(new OnFailClickListener() {
+            @Override
+            public void onFailClick(int failCode) {
+                request(config.url);
+            }
+        });
 
         if (!loadingHelp.isShowLaunchPage()) {
             loadingHelp.showLoading();
         }
         webView.setHostUrl(config.hostUrl);
-        webView.setOnProgressChangedListener(progress -> {
-            if (progress == 100) {
-                if (loadingHelp == null) return;
-                loadingHelp.hideLoading();
+        webView.setOnProgressChangedListener(new BaseWebView.OnProgressChangedListener() {
+            @Override
+            public void progress(int progress) {
+                if (progress == 100) {
+                    if (loadingHelp == null) return;
+                    loadingHelp.hideLoading();
+                }
+                if (onProgressChangedListener == null) return;
+                onProgressChangedListener.progress(progress);
             }
-            if (onProgressChangedListener == null) return;
-            onProgressChangedListener.progress(progress);
         });
         webView.defaultSetting(config);
     }

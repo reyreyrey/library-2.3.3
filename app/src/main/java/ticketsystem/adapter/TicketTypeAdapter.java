@@ -63,14 +63,15 @@ public class TicketTypeAdapter extends LoadMoreRecycleAdapter<TicketType, Ticket
                 rlArea.setVisibility(View.VISIBLE);
                 tvArea.setText(typeInfo.area.equals("") ? "全国" : typeInfo.area);
             }
-
-            itemView.findViewById(R.id.rlBottom).setOnClickListener(v -> {
-                if (mOnItemClickListener != null) {
-                    v.setTag(typeInfo);
-                    mOnItemClickListener.onClick(v);
+            itemView.findViewById(R.id.rlBottom).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnItemClickListener != null) {
+                        v.setTag(typeInfo);
+                        mOnItemClickListener.onClick(v);
+                    }
                 }
             });
-
         }
     }
 

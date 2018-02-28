@@ -180,9 +180,12 @@ public class CodeBaseAdapter extends RecyclerView.Adapter<CodeBaseAdapter.ViewHo
             CodeForChooseAdapter codeForChooseAdapter;
             if (type == TYPE_NORMAL_WITH_SPECIAL && codeDis.size() <= 1) {
                 codeForChooseAdapter = new CodeForChooseAdapter(mContext, numberList, isSpecial, size, position, selectedList);
-                codeForChooseAdapter.setOnClickListener(v -> {
-                    for (int i = 0; i < mCodeForChooseAdapters.size(); i++) {
-                        mCodeForChooseAdapters.get(i).notifyDataSetChanged();
+                codeForChooseAdapter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        for (int i = 0; i < mCodeForChooseAdapters.size(); i++) {
+                            mCodeForChooseAdapters.get(i).notifyDataSetChanged();
+                        }
                     }
                 });
             } else {

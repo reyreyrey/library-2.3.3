@@ -12,9 +12,13 @@ import java.util.List;
 import com.android.library.R;
 
 import charting.charts.BarChart;
+import charting.components.AxisBase;
 import charting.data.BarData;
 import charting.data.BarDataSet;
 import charting.data.BarEntry;
+import charting.data.Entry;
+import charting.formatter.IAxisValueFormatter;
+import charting.highlight.Highlight;
 import charting.interfaces.datasets.IBarDataSet;
 import ticketsystem.base.BaseTitleBar;
 import ticketsystem.base.BaseTitleBarActivity;
@@ -97,8 +101,18 @@ public class CodeRateActivity extends BaseTitleBarActivity<ParityTrendPresenter>
             IBarDataSet barDataSet = BarChartHelper.getBarChartHelper().generateBarDataSet(generateEntry(list), new String[]{"普通码", "特别码"}, colorList);
             barData = new BarData(barDataSet);
             bcAvgAnalysis.setData(barData);
-            bcAvgAnalysis.getXAxis().setValueFormatter((value, axis) -> (int) value + "号");
-            bcAvgAnalysis.setMarker(new DataMarkView(this, (e, highlight) -> ((int) e.getX()) + "号：" + e.getY() + "次"));
+            bcAvgAnalysis.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+                @Override
+                public String getFormattedValue(float value, AxisBase axis) {
+                    return (int) value + "号";
+                }
+            });
+            bcAvgAnalysis.setMarker(new DataMarkView(this, new DataMarkView.IDataValueFormat() {
+                @Override
+                public String format(Entry e, Highlight highlight) {
+                    return ((int) e.getX()) + "号：" + e.getY() + "次";
+                }
+            }));
         }
 
         bcAvgAnalysis.animateY(3000);

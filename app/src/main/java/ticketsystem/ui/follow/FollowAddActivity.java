@@ -17,6 +17,7 @@ import java.util.List;
 
 import library.model.Event;
 import library.rx.ErrorThrowable;
+import rx.functions.Action1;
 import ticketsystem.adapter.TabFragmentAdapter;
 import ticketsystem.base.BaseTitleBar;
 import ticketsystem.base.BaseTitleBarActivity;
@@ -111,9 +112,12 @@ public class FollowAddActivity extends BaseTitleBarActivity<FollowAddPresenter> 
     @Override
     public void onGetTicketListSuccess(List<TicketType> ticketTypeList) {
         mTicketTypes = ticketTypeList;
-        ClickView(titleBarRight).subscribe(o -> {
-            if (mTicketTypes != null) {
-                LaunchUtil.launchActivity(this, FollowSortActivity.class, FollowSortActivity.buildBundle((ArrayList<TicketType>) mTicketTypes));
+        ClickView(titleBarRight).subscribe(new Action1() {
+            @Override
+            public void call(Object o) {
+                if (mTicketTypes != null) {
+                    LaunchUtil.launchActivity(FollowAddActivity.this, FollowSortActivity.class, FollowSortActivity.buildBundle((ArrayList<TicketType>) mTicketTypes));
+                }
             }
         });
         initTabTop(getFragmentTitle(), getFragmentList((ArrayList<TicketType>) ticketTypeList));

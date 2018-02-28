@@ -58,11 +58,18 @@ public class WebActivity<T extends BasePresenter> extends BaseTitleBarActivity<T
 
     @Override
     public void setListener() {
-        webGroup.setOnShouldOverrideUrlListener(url -> LaunchUtil.launchDefaultWeb(this, url, ""));
-
-        webGroup.setOnReceiveTitleListener(title -> {
-            if (TextUtils.isEmpty(config.title)) {
-                titleBar.setTitleText(title);
+        webGroup.setOnShouldOverrideUrlListener(new BaseWebView.OnShouldOverrideUrlListener() {
+            @Override
+            public void load(String url) {
+                LaunchUtil.launchDefaultWeb(WebActivity.this, url, "");
+            }
+        });
+        webGroup.setOnReceiveTitleListener(new BaseWebView.OnReceiveTitleListener() {
+            @Override
+            public void onReceiveTitle(String title) {
+                if (TextUtils.isEmpty(config.title)) {
+                    titleBar.setTitleText(title);
+                }
             }
         });
     }

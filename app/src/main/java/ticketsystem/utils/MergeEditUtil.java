@@ -12,6 +12,7 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.FuncN;
 
 /**
@@ -23,13 +24,16 @@ import rx.functions.FuncN;
 public class MergeEditUtil {
 
     public static Subscription getEnableStateSubscription(View enableView, EditText... editTexts) {
-        return getLimitEnableStateSubscription(enableView, args -> {
-            for (int i = 0; i < args.length; i++) {
-                if (TextUtils.isEmpty(args[i].toString().trim())) {
-                    return false;
+        return getLimitEnableStateSubscription(enableView, new FuncN<Boolean>() {
+            @Override
+            public Boolean call(Object... args) {
+                for (int i = 0; i < args.length; i++) {
+                    if (TextUtils.isEmpty(args[i].toString().trim())) {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
         }, editTexts);
     }
 
@@ -41,6 +45,16 @@ public class MergeEditUtil {
 
         return Observable.combineLatest(observableList, funcN)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(isEnable -> enableView.setEnabled(isEnable), throwable -> enableView.setEnabled(false));
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        enableView.setEnabled(aBoolean);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        enableView.setEnabled(false);
+                    }
+                });
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import library.listview.manager.BaseGroupListManager;
 import library.model.ListData;
+import rx.functions.Func1;
 import ticketsystem.bean.TicketType;
 import ticketsystem.bean.type.TicketTypeEnum;
 import rx.Observable;
@@ -40,39 +41,69 @@ public class TicketTypeManager extends BaseGroupListManager<TicketType> {
             return TicketTypeDataManager
                     .getTicketDataManager()
                     .getCountryData()
-                    .flatMap(ticketTypes -> translateToListData(ticketTypes));
+                    .flatMap(new Func1<List<TicketType>, Observable<ListData<TicketType>>>() {
+                        @Override
+                        public Observable<ListData<TicketType>> call(List<TicketType> ticketTypes) {
+                            return translateToListData(ticketTypes);
+                        }
+                    });
         }
         if (mTicketTypeEnum == TicketTypeEnum.Area) {
             return TicketTypeDataManager
                     .getTicketDataManager()
                     .getAreaTypeData()
-                    .flatMap(ticketTypes -> translateToListData(ticketTypes));
+                    .flatMap(new Func1<List<TicketType>, Observable<ListData<TicketType>>>() {
+                        @Override
+                        public Observable<ListData<TicketType>> call(List<TicketType> ticketTypes) {
+                            return translateToListData(ticketTypes);
+                        }
+                    });
         }
 
         if (mTicketTypeEnum == TicketTypeEnum.Out) {
             return TicketTypeDataManager
                     .getTicketDataManager()
                     .getOutTypeData()
-                    .flatMap(ticketTypes -> translateToListData(ticketTypes));
+                    .flatMap(new Func1<List<TicketType>, Observable<ListData<TicketType>>>() {
+                        @Override
+                        public Observable<ListData<TicketType>> call(List<TicketType> ticketTypes) {
+                            return translateToListData(ticketTypes);
+                        }
+                    });
         }
 
         if (mTicketTypeEnum == TicketTypeEnum.High) {
             return TicketTypeDataManager
                     .getTicketDataManager()
                     .getHighTypeData()
-                    .flatMap(ticketTypes -> translateToListData(ticketTypes));
+                    .flatMap(new Func1<List<TicketType>, Observable<ListData<TicketType>>>() {
+                        @Override
+                        public Observable<ListData<TicketType>> call(List<TicketType> ticketTypes) {
+                            return translateToListData(ticketTypes);
+                        }
+                    });
         }
 
         if (mTicketTypeEnum == TicketTypeEnum.Follow) {
             return TicketTypeDataManager
                     .getTicketDataManager()
                     .getMyFollowData()
-                    .flatMap(ticketTypes -> translateToListData(ticketTypes));
+                    .flatMap(new Func1<List<TicketType>, Observable<ListData<TicketType>>>() {
+                        @Override
+                        public Observable<ListData<TicketType>> call(List<TicketType> ticketTypes) {
+                            return translateToListData(ticketTypes);
+                        }
+                    });
         }
         return TicketTypeDataManager
                 .getTicketDataManager()
                 .getAllData()
-                .flatMap(ticketTypes -> translateToListData(ticketTypes));
+                .flatMap(new Func1<List<TicketType>, Observable<ListData<TicketType>>>() {
+                    @Override
+                    public Observable<ListData<TicketType>> call(List<TicketType> ticketTypes) {
+                        return translateToListData(ticketTypes);
+                    }
+                });
     }
 
 

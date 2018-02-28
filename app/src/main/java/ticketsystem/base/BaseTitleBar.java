@@ -38,25 +38,34 @@ public class BaseTitleBar {
         right = toolView.findViewById(R.id.title_right);
 
         if (left != null) {
-            left.setOnClickListener(view -> {
-                if (listener != null) {
-                    listener.onClick(view);
+            left.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (listener != null) {
+                        listener.onClick(view);
+                    }
                 }
             });
         }
 
         if (right != null) {
-            right.setOnClickListener(view -> {
-                if (rightListener != null) {
-                    rightListener.onClick(view);
+            right.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (rightListener != null) {
+                        rightListener.onClick(view);
+                    }
                 }
             });
         }
 
         if (center != null) {
-            center.setOnClickListener(v -> {
-                if (centerListener != null) {
-                    centerListener.onClick(v);
+            center.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (centerListener != null) {
+                        centerListener.onClick(view);
+                    }
                 }
             });
         }

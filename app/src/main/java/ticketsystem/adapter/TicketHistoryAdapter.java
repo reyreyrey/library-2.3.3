@@ -61,13 +61,15 @@ public class TicketHistoryAdapter extends LoadMoreRecycleAdapter<TicketOpenData,
             OpenCodeAdapter openCodeAdapter = new OpenCodeAdapter(mContext, ticketOpenData.openCode);
             rvOpenResult.setLayoutManager(new GridLayoutManager(mContext, 7));
             rvOpenResult.setAdapter(openCodeAdapter);
-            itemView.setOnClickListener(v -> {
-                if (mOnItemClickListener != null) {
-                    v.setTag(ticketOpenData);
-                    mOnItemClickListener.onClick(v);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mOnItemClickListener != null) {
+                        view.setTag(ticketOpenData);
+                        mOnItemClickListener.onClick(view);
+                    }
                 }
             });
-
         }
     }
 }

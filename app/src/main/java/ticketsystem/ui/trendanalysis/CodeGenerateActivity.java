@@ -31,6 +31,7 @@ import com.android.library.R;
 
 import library.app.AppContext;
 import library.util.ToastUtil;
+import rx.functions.Action1;
 import ticketsystem.adapter.TicketGroupListAdapter;
 import ticketsystem.base.BaseTitleBar;
 import ticketsystem.base.BaseTitleBarActivity;
@@ -114,8 +115,13 @@ public class CodeGenerateActivity extends BaseTitleBarActivity<NumberGeneratePre
     @Override
     protected void setListener() {
         ClickView(findView(R.id.llNumberBase))
-                .subscribe(o -> LaunchUtil.launchActivity(this, CodeBaseSelectActivity.class,
-                        CodeBaseSelectActivity.buildBundle(mTicketRegular, numberBase), REQUEST_NUMBER_BASE));
+                .subscribe(new Action1() {
+                    @Override
+                    public void call(Object o) {
+                        LaunchUtil.launchActivity(CodeGenerateActivity.this, CodeBaseSelectActivity.class,
+                                CodeBaseSelectActivity.buildBundle(mTicketRegular, numberBase), REQUEST_NUMBER_BASE);
+                    }
+                });
         spGenerateCount.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -127,21 +133,30 @@ public class CodeGenerateActivity extends BaseTitleBarActivity<NumberGeneratePre
 
             }
         });
-        ClickView(findView(R.id.tvClear)).subscribe(o -> {
-            ticketGroupListAdapter.getCodeGroups().clear();
-            ticketGroupListAdapter.notifyDataSetChanged();
-        });
-        ClickView(findView(R.id.tvCopy)).subscribe(o -> {
-            ClipboardManager clipboardManager = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
-            StringBuilder sb = new StringBuilder();
-            for (String str : ticketGroupListAdapter.getCodeGroups()) {
-                sb.append(str).append("\n");
+        ClickView(findView(R.id.tvClear)).subscribe(new Action1() {
+            @Override
+            public void call(Object o) {
+                ticketGroupListAdapter.getCodeGroups().clear();
+                ticketGroupListAdapter.notifyDataSetChanged();
             }
-            clipboardManager.setPrimaryClip(ClipData.newPlainText(null, sb));
-            ToastUtil.showToast("已经复制到剪切板");
         });
-        ClickView(findView(R.id.tvShake)).subscribe(o -> {
-            shake();
+        ClickView(findView(R.id.tvCopy)).subscribe(new Action1() {
+            @Override
+            public void call(Object o) {
+                ClipboardManager clipboardManager = (ClipboardManager) CodeGenerateActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                StringBuilder sb = new StringBuilder();
+                for (String str : ticketGroupListAdapter.getCodeGroups()) {
+                    sb.append(str).append("\n");
+                }
+                clipboardManager.setPrimaryClip(ClipData.newPlainText(null, sb));
+                ToastUtil.showToast("已经复制到剪切板");
+            }
+        });
+        ClickView(findView(R.id.tvShake)).subscribe(new Action1() {
+            @Override
+            public void call(Object o) {
+                shake();
+            }
         });
     }
 

@@ -9,6 +9,7 @@ import java.util.List;
 
 import library.cache.SPHelp;
 import ticketsystem.base.BasePresenter;
+import ticketsystem.base.OnSubscribeSuccess;
 import ticketsystem.bean.TicketType;
 import ticketsystem.manager.TicketTypeDataManager;
 import ticketsystem.presenter.view.IFollowAddView;
@@ -27,9 +28,12 @@ public class FollowAddPresenter extends BasePresenter<IFollowAddView> {
     }
 
     public void getMyFollowList() {
-        addSubscribe(TicketTypeDataManager.getTicketDataManager().getMyFollowData().subscribe(getSubscriber(ticketTypeList ->
-                mView.onGetTicketListSuccess(ticketTypeList)
-        )));
+        addSubscribe(TicketTypeDataManager.getTicketDataManager().getMyFollowData().subscribe(getSubscriber(new OnSubscribeSuccess<List<TicketType>>() {
+                    @Override
+                    public void onSuccess(List<TicketType> ticketTypes) {
+                        mView.onGetTicketListSuccess(ticketTypes);
+                    }
+                })));
     }
 
     public void cacheList(List<TicketType> ticketTypes) {

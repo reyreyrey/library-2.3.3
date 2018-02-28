@@ -61,9 +61,12 @@ public class LoadingHelp {
         ivLoadImg.setImageResource(loadResource.getImage());
         tvLoadMsg.setText(loadResource.getErrorText());
         tvLoadHint.setText(loadResource.getErrorHint());
-        tvLoadHint.setOnClickListener(v -> {
-            if (onFailClickListener != null) {
-                onFailClickListener.onFailClick(failCode);
+        tvLoadHint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onFailClickListener != null) {
+                    onFailClickListener.onFailClick(failCode);
+                }
             }
         });
     }

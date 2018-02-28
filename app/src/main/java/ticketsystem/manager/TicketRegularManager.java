@@ -6,6 +6,8 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
 import library.app.AppContext;
+import rx.Subscriber;
+import rx.functions.Action1;
 import ticketsystem.bean.TicketRegular;
 import ticketsystem.utils.JsonUtil;
 import rx.Observable;
@@ -33,16 +35,24 @@ public class TicketRegularManager {
     }
 
     public Observable<List<TicketRegular>> getTicketRegularList() {
-        return sTicketRegular == null ? getDataFromAsset().doOnNext(ticketRegulars -> sTicketRegular = ticketRegulars) : Observable.just(sTicketRegular);
+        return sTicketRegular == null ? getDataFromAsset().doOnNext(new Action1<List<TicketRegular>>() {
+            @Override
+            public void call(List<TicketRegular> ticketRegulars) {
+                sTicketRegular = ticketRegulars;
+            }
+        }): Observable.just(sTicketRegular);
     }
 
 
     private Observable<List<TicketRegular>> getDataFromAsset() {
-        return Observable.create(subscriber -> {
-            List<TicketRegular> ticketRegulars = new Gson().fromJson(JsonUtil.getJson(AppContext.getContext(), "regular.json"), new TypeToken<List<TicketRegular>>() {
-            }.getType());
-            subscriber.onNext(ticketRegulars);
-            subscriber.onCompleted();
+        return Observable.create(new Observable.OnSubscribe<List<TicketRegular>>() {
+            @Override
+            public void call(Subscriber<? super List<TicketRegular>> subscriber) {
+                List<TicketRegular> ticketRegulars = new Gson().fromJson(JsonUtil.getJson(AppContext.getContext(), "regular.json"), new TypeToken<List<TicketRegular>>() {
+                }.getType());
+                subscriber.onNext(ticketRegulars);
+                subscriber.onCompleted();
+            }
         });
     }
 }

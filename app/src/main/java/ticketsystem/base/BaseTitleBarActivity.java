@@ -24,7 +24,12 @@ public abstract class BaseTitleBarActivity<T extends BasePresenter> extends Base
         RelativeLayout content = (RelativeLayout) superContentView.findViewById(R.id.content);
         content.addView(contentView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         BaseTitleBar mTitleBar = new BaseTitleBar(this, toolbar, getDefaultTitleBarLayout());
-        mTitleBar.setOnLeftClickListener(view -> onTitleLeftClick());
+        mTitleBar.setOnLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onTitleLeftClick();
+            }
+        });
         initTitleBar(mTitleBar);
         super.setContentView(superContentView);
     }

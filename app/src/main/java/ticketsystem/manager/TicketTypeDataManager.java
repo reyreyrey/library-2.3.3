@@ -9,6 +9,10 @@ import java.util.Collections;
 import java.util.List;
 
 import library.cache.SPHelp;
+import library.model.ListData;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import ticketsystem.api.DataManager;
 import ticketsystem.bean.TicketType;
 import rx.Observable;
@@ -70,16 +74,26 @@ public class TicketTypeDataManager {
     public Observable<List<TicketType>> getAreaTypeData() {
         return mAreaTypeData == null ?
                 getAllData()
-                        .flatMap(ticketTypes -> {
-                            List<TicketType> areaTypeList = new ArrayList<TicketType>();
-                            for (TicketType ticketType : ticketTypes) {
-                                if (!ticketType.area.equals("") && !ticketType.issuer.equals("境外")) {
-                                    areaTypeList.add(ticketType);
+                        .flatMap(new Func1<List<TicketType>, Observable<List<TicketType>>>() {
+                            @Override
+                            public Observable<List<TicketType>> call(List<TicketType> ticketTypes) {
+                                List<TicketType> areaTypeList = new ArrayList<TicketType>();
+                                for (TicketType ticketType : ticketTypes) {
+                                    if (!ticketType.area.equals("") && !ticketType.issuer.equals("境外")) {
+                                        areaTypeList.add(ticketType);
+                                    }
                                 }
+                                Collections.sort(areaTypeList);
+                                return Observable.just(areaTypeList);
                             }
-                            Collections.sort(areaTypeList);
-                            return Observable.just(areaTypeList);
-                        }).doOnNext(ticketTypes -> mAreaTypeData = ticketTypes) : Observable.just(mAreaTypeData);
+                        })
+                        .doOnNext(new Action1<List<TicketType>>() {
+                            @Override
+                            public void call(List<TicketType> ticketTypes) {
+                                mAreaTypeData = ticketTypes;
+                            }
+                        })
+                : Observable.just(mAreaTypeData);
     }
 
     /**
@@ -90,16 +104,26 @@ public class TicketTypeDataManager {
     public Observable<List<TicketType>> getHighTypeData() {
         return mHighRateTypeData == null ?
                 getAllData()
-                        .flatMap(ticketTypes -> {
-                            List<TicketType> highTypeList = new ArrayList<TicketType>();
-                            for (TicketType ticketType : ticketTypes) {
-                                if (ticketType.high.equals("true")) {
-                                    highTypeList.add(ticketType);
+                        .flatMap(new Func1<List<TicketType>, Observable<List<TicketType>>>() {
+                            @Override
+                            public Observable<List<TicketType>> call(List<TicketType> ticketTypes) {
+                                List<TicketType> highTypeList = new ArrayList<TicketType>();
+                                for (TicketType ticketType : ticketTypes) {
+                                    if (ticketType.high.equals("true")) {
+                                        highTypeList.add(ticketType);
+                                    }
                                 }
+                                Collections.sort(highTypeList);
+                                return Observable.just(highTypeList);
                             }
-                            Collections.sort(highTypeList);
-                            return Observable.just(highTypeList);
-                        }).doOnNext(ticketTypes -> mHighRateTypeData = ticketTypes) : Observable.just(mHighRateTypeData);
+                        })
+                        .doOnNext(new Action1<List<TicketType>>() {
+                            @Override
+                            public void call(List<TicketType> ticketTypes) {
+                                mHighRateTypeData = ticketTypes;
+                            }
+                        })
+                : Observable.just(mHighRateTypeData);
     }
 
     /**
@@ -110,17 +134,26 @@ public class TicketTypeDataManager {
     public Observable<List<TicketType>> getOutTypeData() {
         return mOutTypeData == null ?
                 getAllData()
-                        .flatMap(ticketTypes -> {
-                            List<TicketType> outTypeList = new ArrayList<TicketType>();
-                            for (TicketType ticketType : ticketTypes) {
-                                if (ticketType.issuer.equals("境外")) {
-                                    outTypeList.add(ticketType);
+                        .flatMap(new Func1<List<TicketType>, Observable<List<TicketType>>>() {
+                            @Override
+                            public Observable<List<TicketType>> call(List<TicketType> ticketTypes) {
+                                List<TicketType> outTypeList = new ArrayList<TicketType>();
+                                for (TicketType ticketType : ticketTypes) {
+                                    if (ticketType.issuer.equals("境外")) {
+                                        outTypeList.add(ticketType);
+                                    }
                                 }
+                                Collections.sort(outTypeList);
+                                return Observable.just(outTypeList);
                             }
-                            Collections.sort(outTypeList);
-                            return Observable.just(outTypeList);
                         })
-                        .doOnNext(ticketTypes -> mOutTypeData = ticketTypes) : Observable.just(mOutTypeData);
+                        .doOnNext(new Action1<List<TicketType>>() {
+                            @Override
+                            public void call(List<TicketType> ticketTypes) {
+                                mOutTypeData = ticketTypes;
+                            }
+                        })
+                : Observable.just(mOutTypeData);
     }
 
     /**
@@ -130,15 +163,23 @@ public class TicketTypeDataManager {
      */
     public Observable<List<TicketType>> getAllData() {
         return mAllTypeData == null ?
-                DataManager
-                        .getTicketList()
-                        .flatMap(ticketTypeListData -> {
-                            Collections.sort(ticketTypeListData.list);
-                            return Observable.just(ticketTypeListData.list);
-                        })
-                        .doOnNext(allData -> mAllTypeData = allData)
-                        .flatMap(allData -> Observable.just(allData)
-                        )
+                DataManager.getTicketList().flatMap(new Func1<ListData<TicketType>, Observable<List<TicketType>>>() {
+                    @Override
+                    public Observable<List<TicketType>> call(ListData<TicketType> ticketTypeListData) {
+                        Collections.sort(ticketTypeListData.list);
+                        return Observable.just(ticketTypeListData.list);
+                    }
+                }).doOnNext(new Action1<List<TicketType>>() {
+                    @Override
+                    public void call(List<TicketType> allData) {
+                        mAllTypeData = allData;
+                    }
+                }).flatMap(new Func1<List<TicketType>, Observable<List<TicketType>>>() {
+                    @Override
+                    public Observable<List<TicketType>> call(List<TicketType> ticketTypes) {
+                        return Observable.just(ticketTypes);
+                    }
+                })
                 : Observable.just(mAllTypeData);
     }
 
@@ -149,17 +190,25 @@ public class TicketTypeDataManager {
      */
     public Observable<List<TicketType>> getCountryData() {
         return mCountryTypeData == null ?
-                getAllData()
-                        .flatMap(ticketTypes -> {
-                            List<TicketType> countryTypeList = new ArrayList<TicketType>();
-                            for (TicketType ticketType : ticketTypes) {
-                                if (ticketType.area.equals("") && !ticketType.issuer.equals("境外")) {
-                                    countryTypeList.add(ticketType);
-                                }
+                getAllData().flatMap(new Func1<List<TicketType>, Observable<List<TicketType>>>() {
+                    @Override
+                    public Observable<List<TicketType>> call(List<TicketType> ticketTypes) {
+                        List<TicketType> countryTypeList = new ArrayList<TicketType>();
+                        for (TicketType ticketType : ticketTypes) {
+                            if (ticketType.area.equals("") && !ticketType.issuer.equals("境外")) {
+                                countryTypeList.add(ticketType);
                             }
-                            Collections.sort(countryTypeList);
-                            return Observable.just(countryTypeList);
-                        }).doOnNext(ticketTypes -> mCountryTypeData = ticketTypes) : Observable.just(mCountryTypeData);
+                        }
+                        Collections.sort(countryTypeList);
+                        return Observable.just(countryTypeList);
+                    }
+                }).doOnNext(new Action1<List<TicketType>>() {
+                    @Override
+                    public void call(List<TicketType> ticketTypes) {
+                        mCountryTypeData = ticketTypes;
+                    }
+                })
+                : Observable.just(mCountryTypeData);
     }
 
     /**
@@ -168,19 +217,24 @@ public class TicketTypeDataManager {
      * @return
      */
     public Observable<List<TicketType>> getMyFollowData() {
-
-        return getDataFromCache().flatMap(ticketTypes ->
-                ticketTypes == null ? Observable.just(new ArrayList<TicketType>()) : Observable.just(ticketTypes)
-        );
+        return getDataFromCache().flatMap(new Func1<List<TicketType>, Observable<List<TicketType>>>() {
+            @Override
+            public Observable<List<TicketType>> call(List<TicketType> ticketTypes) {
+                return ticketTypes == null ? Observable.just(new ArrayList<TicketType>()) : Observable.just(ticketTypes);
+            }
+        });
     }
 
     private Observable<List<TicketType>> getDataFromCache() {
-        return Observable.create(subscriber -> {
-            String str = (String) SPHelp.getUserParam(BuildConfig.KEY_MY_FOLLOW, "");
-            List<TicketType> ticketTypes = new Gson().fromJson(str, new TypeToken<List<TicketType>>() {
-            }.getType());
-            subscriber.onNext(ticketTypes);
-            subscriber.onCompleted();
+        return Observable.create(new Observable.OnSubscribe<List<TicketType>>() {
+            @Override
+            public void call(Subscriber<? super List<TicketType>> subscriber) {
+                String str = (String) SPHelp.getUserParam(BuildConfig.KEY_MY_FOLLOW, "");
+                List<TicketType> ticketTypes = new Gson().fromJson(str, new TypeToken<List<TicketType>>() {
+                }.getType());
+                subscriber.onNext(ticketTypes);
+                subscriber.onCompleted();
+            }
         });
     }
 

@@ -35,7 +35,12 @@ public abstract class BaseFuncActivity<T extends BasePresenter> extends BaseActi
         mPresenter = getPresenter();
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-        getBaseContentView().setOnClickListener(v -> hideAllKeyBoard());
+        getBaseContentView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideAllKeyBoard();
+            }
+        });
         getEditTextView((ViewGroup) getBaseContentView());
     }
 

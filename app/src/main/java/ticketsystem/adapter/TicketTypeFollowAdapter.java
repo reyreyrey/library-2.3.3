@@ -79,20 +79,21 @@ public class TicketTypeFollowAdapter extends LoadMoreRecycleAdapter<TicketType, 
                 rlFollow.setSelected(false);
                 tvFollow.setText("关注");
             }
-
-            rlFollow.setOnClickListener(v ->
-            {
-                if (!rlFollow.isSelected()) {
-                    mFollowedTicketTypes.add(typeInfo);
-                } else {
-                    for (TicketType followedType : mFollowedTicketTypes) {
-                        if (typeInfo.code.equals(followedType.code)) {
-                            mFollowedTicketTypes.remove(followedType);
-                            break;
+            rlFollow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!rlFollow.isSelected()) {
+                        mFollowedTicketTypes.add(typeInfo);
+                    } else {
+                        for (TicketType followedType : mFollowedTicketTypes) {
+                            if (typeInfo.code.equals(followedType.code)) {
+                                mFollowedTicketTypes.remove(followedType);
+                                break;
+                            }
                         }
                     }
+                    notifyItemChanged(realPosition);
                 }
-                notifyItemChanged(realPosition);
             });
         }
     }
